@@ -12,7 +12,7 @@ public class BaseUI {
 		prop = FileIO.initProperties();
 	}
 	
-	public static void invokeBrowser() {
+	public static WebDriver invokeBrowser() {
 		prop = FileIO.initProperties();
 		String browserChoice = prop.getProperty("browserName");
 		switch(browserChoice.toLowerCase()){
@@ -28,11 +28,13 @@ public class BaseUI {
 		}
 		driver.manage().window().maximize();
 		System.out.println("Browser Started");
+		return driver;
 	}
 	
 	
-	public static void getURL() {
+	public static WebDriver getURL() {
 		driver.get(prop.getProperty("websiteURL"));
+		return driver;
 	}
 	
 	public static void tearDown() {

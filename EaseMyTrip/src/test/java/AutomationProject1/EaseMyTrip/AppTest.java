@@ -1,16 +1,8 @@
 package AutomationProject1.EaseMyTrip;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
-import org.testng.annotations.Test;
-import org.testng.annotations.Test;
-import org.testng.annotations.Test;
-import org.testng.annotations.Test;
-import org.testng.annotations.Test;
-import org.testng.annotations.Test;
-
 import java.io.IOException;
-
-import org.testng.AssertJUnit;
 
 /**
  * Unit test for simple App.
@@ -30,6 +22,7 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
+	/*
     @Test(priority = 0)
 	public void testSetUp()
     {
@@ -38,21 +31,30 @@ public class AppTest
     @Test(priority = 1)
 	public void testInvokeBrowser()
     {
-    	BaseUI.invokeBrowser();
+    	WebDriver driver = BaseUI.invokeBrowser();
     }
     @Test(priority = 2)
 	public void testGetURL()
     {
     	BaseUI.getURL();
     }
+    
     @Test(priority = 3)
 	public void testTearDown()
     {
     	BaseUI.tearDown();
     }
-   @Test(priority = 4)
+    */
+    @Test(priority = 4)
+    public void testSearchFlights() {
+ 	   	HomePage.searchFlights();
+    }
+    
+
+   @Test(priority = 5)
    public void testReadExcelFile() throws IOException {
 	   FileIO.printData(FileIO.getExcelData());
    }
+
     
 }
