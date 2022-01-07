@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="5" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-01-06T17:03:43 PST" name="Suite" finished-at="2022-01-06T17:03:47 PST" duration-ms="4234">
+    <groups>
+    </groups>
+    <test started-at="2022-01-06T17:03:43 PST" name="Test" finished-at="2022-01-06T17:03:47 PST" duration-ms="4234">
+      <class name="AutomationProject1.EaseMyTrip.AppTest">
+        <test-method signature="testSetUp()[pri:0, instance:AutomationProject1.EaseMyTrip.AppTest@37e547da]" started-at="2022-01-06T17:03:43 PST" name="testSetUp" finished-at="2022-01-06T17:03:43 PST" duration-ms="4" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetUp -->
+        <test-method signature="testInvokeBrowser()[pri:1, instance:AutomationProject1.EaseMyTrip.AppTest@37e547da]" started-at="2022-01-06T17:03:43 PST" name="testInvokeBrowser" finished-at="2022-01-06T17:03:45 PST" duration-ms="2562" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInvokeBrowser -->
+        <test-method signature="testGetURL()[pri:2, instance:AutomationProject1.EaseMyTrip.AppTest@37e547da]" started-at="2022-01-06T17:03:45 PST" name="testGetURL" finished-at="2022-01-06T17:03:47 PST" duration-ms="1293" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testGetURL -->
+        <test-method signature="testTearDown()[pri:3, instance:AutomationProject1.EaseMyTrip.AppTest@37e547da]" started-at="2022-01-06T17:03:47 PST" name="testTearDown" finished-at="2022-01-06T17:03:47 PST" duration-ms="126" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testTearDown -->
+        <test-method signature="testReadExcelFile()[pri:4, instance:AutomationProject1.EaseMyTrip.AppTest@37e547da]" started-at="2022-01-06T17:03:47 PST" name="testReadExcelFile" finished-at="2022-01-06T17:03:47 PST" duration-ms="231" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testReadExcelFile -->
+      </class> <!-- AutomationProject1.EaseMyTrip.AppTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>
