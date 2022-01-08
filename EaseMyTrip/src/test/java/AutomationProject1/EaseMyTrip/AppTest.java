@@ -45,9 +45,9 @@ public class AppTest
     	BaseUI.tearDown();
     }
     */
-    @Test(priority = 4)
+    @Test(priority = 4, description = "Checking for flights from Mumbai to chennai on Jan 23rd with 4 adults, 3 children and 2 infants.")
     public void testSearchFlights() {
- 	   	HomePage.searchFlights();
+ 	   	HomePage.searchFlights("Mum", "Chennai", "1/3/2023", "Economy", new int[]{4,3,2});
     }
     
 
