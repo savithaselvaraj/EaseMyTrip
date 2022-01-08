@@ -45,13 +45,13 @@ public class AppTest
     	BaseUI.tearDown();
     }
     */
-    @Test(priority = 4)
+    @Test(priority = 0)
     public void testSearchFlights() {
  	   	HomePage.searchFlights();
     }
     
 
-   @Test(priority = 5)
+   @Test(priority = 1)
    public void testReadExcelFile() throws IOException {
 	   FileIO.printData(FileIO.getExcelData());
    }
