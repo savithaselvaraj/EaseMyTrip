@@ -45,13 +45,13 @@ public class AppTest
     	BaseUI.tearDown();
     }
     */
-    @Test(priority = 4, description = "Checking for flights from Mumbai to chennai on Jan 23rd with 4 adults, 3 children and 2 infants.")
+    @Test(priority = 0)
     public void testSearchFlights() {
- 	   	HomePage.searchFlights("Mum", "Chennai", "1/3/2023", "Economy", new int[]{4,3,2});
+ 	   	HomePage.searchFlights();
     }
     
 
-   @Test(priority = 5)
+   @Test(priority = 1)
    public void testReadExcelFile() throws IOException {
 	   FileIO.printData(FileIO.getExcelData());
    }
