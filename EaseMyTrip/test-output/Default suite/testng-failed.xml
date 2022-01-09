@@ -5,7 +5,7 @@
     <classes>
       <class name="AutomationProject1.EaseMyTrip.AppTest">
         <methods>
-          <include name="testSearchFlights"/>
+          <include name="searchFlights"/>
         </methods>
       </class> <!-- AutomationProject1.EaseMyTrip.AppTest -->
     </classes>
