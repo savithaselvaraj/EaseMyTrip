@@ -5,7 +5,11 @@
     <classes>
       <class name="AutomationProject1.EaseMyTrip.AppTest">
         <methods>
-          <include name="testSearchFlights"/>
+          <include name="testInvokeBrowser"/>
+          <include name="testTearDown"/>
+          <include name="testGetURL"/>
+          <include name="testNavToFlights"/>
+          <include name="testReadExcelFile"/>
         </methods>
       </class> <!-- AutomationProject1.EaseMyTrip.AppTest -->
     </classes>
