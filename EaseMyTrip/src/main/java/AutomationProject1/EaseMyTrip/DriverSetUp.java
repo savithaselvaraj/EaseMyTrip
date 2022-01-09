@@ -41,13 +41,14 @@ public class DriverSetUp {
 	
 	public static WebDriver getFirefoxDriver() {
 		prop = FileIO.initProperties();
+		String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0";
 		String userDir = System.getProperty("user.dir");
 		FirefoxOptions fo = new FirefoxOptions();
+		fo.addPreference("general.useragent.override",userAgent);
 		fo.addArguments("--disable-infobars");
 		fo.addArguments("--disable-notifications");
 		fo.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.DISMISS_AND_NOTIFY);
-		System.setProperty("webdriver.gecko.driver",userDir
-				+ prop.getProperty("firefoxDriver"));
+		//System.setProperty("webdriver.gecko.driver",userDir + prop.getProperty("firefoxDriver"));
 		driver = new FirefoxDriver(fo);
 		return driver;
 	}

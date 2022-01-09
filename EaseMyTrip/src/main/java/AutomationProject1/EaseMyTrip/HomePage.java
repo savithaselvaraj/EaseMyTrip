@@ -6,21 +6,22 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
+public class HomePage extends BaseUI {
 
-	private static WebDriver driver;
-
-	public static void goToHomePage() {
-		BaseUI.setUp();
-		BaseUI.invokeBrowser();
-		driver = BaseUI.getURL();
+	private WebDriver driver;
+	
+	public HomePage() {
+		
+	}
+	
+	public HomePage(WebDriver driver) {
+		this.driver = driver;
 	}
 
-	public static void searchFlights(String fromCity, String toCity, String departureDate, String travClass, int[] noOfTravellers) {
-		goToHomePage();
+	public void searchFlights(String fromCity, String toCity, String departureDate, String travClass, int[] noOfTravellers) {
+		
 //		String fromStr = "Mumbai";
 //		String toStr = "Chennai";
 //		String month = "NOV 2022";
@@ -76,7 +77,7 @@ public class HomePage {
 		fl.getFlights();
 	}
 
-	public static void travellers(int adult, int children, int infants) {
+	public void travellers(int adult, int children, int infants) {
 
 		WebElement Adultvalue = driver.findElement(By.id("optAdult"));
 		int displayvalue = Integer.parseInt(Adultvalue.getAttribute("value"));
@@ -113,7 +114,7 @@ public class HomePage {
 		driver.findElement(By.xpath("//*[@id=\"traveLer\"]")).click();
 	}
 
-	private static void selectDepartureDate(String dateToSelect) {
+	private void selectDepartureDate(String dateToSelect) {
 
 		By departureDate = By.id("ddate");
 		By labelMonth1 = By.xpath("//div[@class='box']//div[@class='month']");
@@ -168,7 +169,7 @@ public class HomePage {
 
 	}
 
-	private static String getFullMonthName(String abbreviatedMonthname) {
+	private String getFullMonthName(String abbreviatedMonthname) {
 		switch (abbreviatedMonthname) {
 		case "JAN":
 			return "JANUARY";

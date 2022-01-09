@@ -87,6 +87,16 @@ public class FileIO {
 		}
 	}
 	
+	public static int countTestDataRows(String[][] data) {
+		int numTestRows = (data.length);
+		System.out.println("There are "+numTestRows+" rows of test data available.");
+		return numTestRows+1;
+	}
+	
+	public static String[] getTestDataByRowInd(String[][] rows, int rowInd) {
+		
+		return rows[rowInd];
+	}
 	
 	public static void writeToExcel(String filePath, String sheetName, List<WebElement> elements1, List<WebElement> elements2) throws IOException {
 		

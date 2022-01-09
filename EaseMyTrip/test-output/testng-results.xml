@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="0" total="3" passed="3" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-01-08T13:15:11 CST" name="Default suite" finished-at="2022-01-08T13:15:27 CST" duration-ms="16795">
+  <suite started-at="2022-01-09T12:21:13 PST" name="Default suite" finished-at="2022-01-09T12:21:27 PST" duration-ms="13948">
     <groups>
     </groups>
-    <test started-at="2022-01-08T13:15:11 CST" name="Default test" finished-at="2022-01-08T13:15:27 CST" duration-ms="16795">
-      <class name="AutomationProject1.EaseMyTrip.AppTest">
-        <test-method signature="testSearchFlights()[pri:4, instance:AutomationProject1.EaseMyTrip.AppTest@7c0c77c7]" started-at="2022-01-08T13:15:11 CST" name="testSearchFlights" finished-at="2022-01-08T13:15:26 CST" duration-ms="15436" status="PASS">
+    <test started-at="2022-01-09T12:21:13 PST" name="Default test" finished-at="2022-01-09T12:21:27 PST" duration-ms="13948">
+      <class name="AutomationProject1.EaseMyTrip.EaseMyTripTests">
+        <test-method signature="setUp()[pri:0, instance:AutomationProject1.EaseMyTrip.EaseMyTripTests@a4102b8]" started-at="2022-01-09T12:21:13 PST" name="setUp" finished-at="2022-01-09T12:21:17 PST" duration-ms="3466" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testSearchFlights()[pri:4, instance:AutomationProject1.EaseMyTrip.EaseMyTripTests@a4102b8]" started-at="2022-01-09T12:21:17 PST" name="testSearchFlights" description="Checking for flights from Mumbai to chennai on Jan 23rd with 4 adults, 3 children and 2 infants." finished-at="2022-01-09T12:21:27 PST" duration-ms="10245" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSearchFlights -->
-        <test-method signature="testReadExcelFile()[pri:5, instance:AutomationProject1.EaseMyTrip.AppTest@7c0c77c7]" started-at="2022-01-08T13:15:26 CST" name="testReadExcelFile" finished-at="2022-01-08T13:15:27 CST" duration-ms="1295" status="PASS">
+        <test-method signature="testReadExcelFile()[pri:5, instance:AutomationProject1.EaseMyTrip.EaseMyTripTests@a4102b8]" started-at="2022-01-09T12:21:27 PST" name="testReadExcelFile" finished-at="2022-01-09T12:21:27 PST" duration-ms="225" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testReadExcelFile -->
-      </class> <!-- AutomationProject1.EaseMyTrip.AppTest -->
+      </class> <!-- AutomationProject1.EaseMyTrip.EaseMyTripTests -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
