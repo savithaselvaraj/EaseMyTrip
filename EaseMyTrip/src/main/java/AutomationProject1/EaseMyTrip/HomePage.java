@@ -12,6 +12,13 @@ public class HomePage extends BaseUI {
 
 	private WebDriver driver;
 	
+	By fromInput = getLocator("fromInput_id");
+	By toInput = getLocator("toInput_id");
+	By travellerDropDown = getLocator("Travellerdropddown_xpath");
+	By travelClass = getLocator("travelClass_xpath");
+	By tripDoneBtn = getLocator("tripDoneBtn_xpath");
+	By searchBtn = getLocator("searchBtn_xpath");
+	
 	public HomePage() {
 		
 	}
@@ -20,61 +27,42 @@ public class HomePage extends BaseUI {
 		this.driver = driver;
 	}
 
-	public void searchFlights(String fromCity, String toCity, String departureDate, String travClass, int[] noOfTravellers) {
+	public void searchFlights(String[] testData) {
+
+		String fromCity = testData[0];
+		String toCity = testData[1];
+		String departureDate = testData[2];
+		String travClass = testData[3];
+		int adultTravlers = Integer.parseInt(testData[4].replaceAll(".0", ""));
+		int childTravelers = Integer.valueOf(testData[5].replaceAll(".0", ""));
+		int infantTravelers = Integer.valueOf(testData[6].replaceAll(".0", ""));
 		
-//		String fromStr = "Mumbai";
-//		String toStr = "Chennai";
-//		String month = "NOV 2022";
-//		String departureDate = "5/16/2024";
-//		String travClass = "Prem.Economy";
-
-		WebElement from = driver.findElement(By.id("FromSector_show"));
+		clickOn(fromInput, 10);
+		sendText(fromInput,fromCity);
+		
+		WebElement from = driver.findElement(By.xpath("//div[@id='fromautoFill']//span[@class='ct'][contains(text(),'" + fromCity + "')]"));
 		from.click();
-		from.sendKeys(fromCity);
-		from = driver.findElement(By.xpath("//div[@id='fromautoFill']//span[@class='ct'][contains(text(),'" + fromCity + "')]"));
-		from.click();
+		
+		clickOn(toInput, 10);
+		sendText(toInput,toCity);
 
-		WebElement to = driver.findElement(By.id("Editbox13_show"));
-		to.click();
-		to.sendKeys(toCity);
-		to = driver.findElement(By.xpath("//div[@id='toautoFill']//span[@class='ct'][contains(text(),'" + toCity + "')]"));
+		WebElement to = driver.findElement(By.xpath("//div[@id='toautoFill']//span[@class='ct'][contains(text(),'" + toCity + "')]"));
 		to.click();
 
 		selectDepartureDate(departureDate);
+
+		clickOn(travellerDropDown, 10);
+
+		travellers(adultTravlers, childTravelers, infantTravelers);
+
+		clickOn(travelClass, 10);
 		
-/*
-		WebElement ddate = driver.findElement(By.id("ddate"));
-		ddate.click();
-
-		WebElement monthElement = driver.findElement(By.xpath("//div[@class='month2']"));
-
-		WebElement navNxt = driver.findElement(By.xpath("//div[@class='month3']//img"));
-
-		while (!monthElement.getText().contains(month)) {
-			navNxt.click();
-			monthElement = driver.findElement(By.xpath("//div[@class='month2']"));
-			navNxt = driver.findElement(By.xpath("//div[@class='month3']//img"));
-		}
-		WebElement dayElement = driver.findElement(By.xpath("//div[@class='days']//li[contains(text(),'15')]"));
-		dayElement.click();
-*/
-		// Chaaru's code
-
-		WebElement Travellerdropddown = driver
-				.findElement(By.xpath("//*[@id=\"frmHome\"]/div[5]/div[2]/div[3]/div[1]/div[5]/div/a/span"));
-		Travellerdropddown.click();
-
-		travellers(noOfTravellers[0], noOfTravellers[1], noOfTravellers[2]);
-
-		driver.findElement(By.xpath("//*[@id='frmHome']/div[5]/div[2]/div[3]/div[1]/div[6]/div/a/span")).click();
 		driver.findElement(By.xpath("//label[contains(text(),'" + travClass + "')]/input[@name='optClass']")).click();
-		driver.findElement(By.xpath("//a[@id='tripType']")).click();
-		driver.findElement(By.xpath("//*[@id='search']//input")).click();
+		
+		clickOn(tripDoneBtn,10);
+		clickOn(searchBtn,10);
 
-		// End Chaaru's code
 
-		FlightList fl = new FlightList(driver);
-		fl.getFlights();
 	}
 
 	public void travellers(int adult, int children, int infants) {

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -98,9 +99,9 @@ public class FileIO {
 		return rows[rowInd];
 	}
 	
-	public static void writeToExcel(String filePath, String sheetName, List<WebElement> elements1, List<WebElement> elements2) throws IOException {
+	public static void writeToExcel(String fileName, String sheetName, ArrayList<String> data) throws IOException {
 		
-		File file = new File(filePath);
+		File file = new File(System.getProperty("user.dir") + fileName);
 		FileInputStream fis = new FileInputStream(file);
 		
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
@@ -108,19 +109,20 @@ public class FileIO {
 		
 		int numOfRows = sheet.getLastRowNum()+1;
 		
-		for(int i=0; i<elements1.size();i++) {
-			System.out.println(elements1.get(i).getText());
-			System.out.println(elements2.get(i).getText());
-			
+		for(int i=0; i<data.size();i++) {
 			XSSFRow row = sheet.createRow(numOfRows++);
-			XSSFCell cell = row.createCell(0);
+			String[] rowData = data.get(i).split("\t");
+			for(int j=0; j<rowData.length; j++) {
+				row.createCell(j).setCellValue(rowData[j]);
+			}
 			
-			row.createCell(0).setCellValue(elements1.get(i).getText());
-			row.createCell(1).setCellValue(elements2.get(i).getText());
+//			row.createCell(0).setCellValue(elements1.get(i).getText());
+//			row.createCell(1).setCellValue(elements2.get(i).getText());
 		}
 		FileOutputStream fos = new FileOutputStream(file);
 		wb.write(fos);
 		fos.close();
+		wb.close();
 		
 		System.out.println("Written successfully");
 	}

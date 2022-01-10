@@ -1,5 +1,6 @@
 package AutomationProject1.EaseMyTrip;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -16,7 +17,8 @@ public class FlightList {
 		this.driver = driver;
 	}
 
-	public void getFlights() {
+	public ArrayList<String> getFlights() {
+		
 		System.out.println(driver.getCurrentUrl());
 
 		List<WebElement> flightNames=(new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//span[@class='txt-r4 ng-binding']")));
@@ -28,15 +30,15 @@ public class FlightList {
 		System.out.println("There are "+flightNames.size()+" flights.");
 		System.out.println("There are "+flightTimes.size()+" flight timings");
 		
+		ArrayList<String> matchingRows = new ArrayList<>();
+		
 		for(int i=0, j=0; i<flightNames.size();i++,j=j+2) {
 			System.out.print(flightNames.get(i).getText()+"\t"+flightTimes.get(j).getText()+"\t"+flightTimes.get(j+1).getText()+"\t"+flightPrices.get(j).getText());
 			System.out.println();
+			
+			matchingRows.add(flightNames.get(i).getText()+"\t"+flightTimes.get(j).getText()+"\t"+flightTimes.get(j+1).getText()+"\t"+flightPrices.get(j).getText());
 		}
 		
-//		for (WebElement flightName: flightNames) {
-//			System.out.println(flightName.getText());
-//		}
-		
-
+		return matchingRows;
 	}	
 }

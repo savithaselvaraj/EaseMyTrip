@@ -3,7 +3,7 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="AutomationProject1.EaseMyTrip.EaseMyTripTests"/>
+      <class name="AutomationProject1.EaseMyTrip.EaseMyTripTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
