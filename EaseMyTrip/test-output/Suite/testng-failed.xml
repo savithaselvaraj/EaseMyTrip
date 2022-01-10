@@ -3,11 +3,12 @@
 <suite name="Failed suite [Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="AutomationProject1.EaseMyTrip.AppTest">
+      <class name="AutomationProject1.EaseMyTrip.EaseMyTripTest">
         <methods>
+          <include name="readFlightsList"/>
           <include name="testSearchFlights"/>
         </methods>
-      </class> <!-- AutomationProject1.EaseMyTrip.AppTest -->
+      </class> <!-- AutomationProject1.EaseMyTrip.EaseMyTripTest -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->
