@@ -1,9 +1,14 @@
 package AutomationProject1.EaseMyTrip;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +18,7 @@ public class BaseUI {
 	
 	public static WebDriver driver;
 	public static Properties prop;
+	public static int count=1;
 	
 	public BaseUI() {
 		prop = FileIO.initProperties();
@@ -117,4 +123,13 @@ public class BaseUI {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void screenShots() throws IOException {
+		String userDir = System.getProperty("user.dir");
+		File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		String fileName = "scsht"+count+".jpg";
+		FileUtils.copyFile(src, new File(userDir+prop.getProperty("screenshotsPath")+fileName));
+		count++;
+	}
+	
 }

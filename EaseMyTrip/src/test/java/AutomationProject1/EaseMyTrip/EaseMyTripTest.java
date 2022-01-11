@@ -20,28 +20,37 @@ public class EaseMyTripTest extends BaseUI {
 		super();
 	}	
 	
+	@Test(priority = 0)
+	public void openBrowser() {
+		driver = invokeBrowser();
+	}
+	
 	@DataProvider
 	public Object[][] flightSearchData() throws IOException{
 		Object[][] testData = FileIO.getExcelData();
 		return testData;
 	}
 	
-	
     @Test(dataProvider = "flightSearchData", priority = 4)
     public void testSearchFlights
     (String fromStr, String toStr, String dDateStr, String tclass, String adult, String child, String infant )  
     		throws IOException {
-		driver = invokeBrowser();
+		
     	this.driver.navigate().to(prop.getProperty("websiteURL"));
     	HomePage homePage = new HomePage(driver);
  	   	homePage.searchFlights(fromStr, toStr, dDateStr, tclass, adult, child, infant ) ;
  	   	FlightList fl = new FlightList(driver);
  	   	ArrayList<String> result = fl.getFlights();
+ 	    screenShots();
  	    String timeStamp = new SimpleDateFormat("MM-dd HH-mm").format(new Date());
  	   	String sheetName = fromStr+"-"+toStr+"-"+timeStamp;
  	   	FileIO.writeToExcel(prop.getProperty("filePath"), sheetName, result);
-		BaseUI.closeBrowser();
     }
+    
+    @Test(priority = 6)
+	public void tearDown() {
+		closeBrowser();
+	}
     
 }
 	
