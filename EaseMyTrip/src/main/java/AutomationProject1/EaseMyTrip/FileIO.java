@@ -5,14 +5,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.WebElement;
 
 public class FileIO {
 
@@ -49,24 +47,24 @@ public class FileIO {
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 		XSSFSheet sheet = wb.getSheet(sheetName);
 		
-		int numOfRows = sheet.getLastRowNum()+1;
+		int numOfRows = sheet.getLastRowNum();
 		int numOfCols = sheet.getRow(0).getLastCellNum();
 		
 		String[][] strData = new String[numOfRows][numOfCols];
 		
 		XSSFCell cell; 
 		
-		for (int r=0; r <numOfRows; r++) {
+		for (int r=1, i =0; r <numOfRows+1; i++, r++) {
 			for ( int c=0; c < numOfCols; c++ ) {
 				
 				cell = sheet.getRow(r).getCell(c);
 				
 				switch(cell.getCellType()) {
 				case STRING:
-					strData[r][c] = sheet.getRow(r).getCell(c).getStringCellValue();
+					strData[i][c] = sheet.getRow(r).getCell(c).getStringCellValue();
 					break;
 				case NUMERIC:
-					strData[r][c] = String.valueOf(sheet.getRow(r).getCell(c).getNumericCellValue());
+					strData[i][c] = String.valueOf(sheet.getRow(r).getCell(c).getNumericCellValue());
 					break;
 				case BLANK:
 					System.out.println("Blank");
@@ -75,7 +73,7 @@ public class FileIO {
 				}
 			}
 		}
-		
+		wb.close();
 		return strData;
 	}
 	
@@ -105,13 +103,19 @@ public class FileIO {
 		FileInputStream fis = new FileInputStream(file);
 		
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet = wb.getSheet(sheetName);
+		XSSFSheet sheet = wb.createSheet(sheetName);
 		
-		int numOfRows = sheet.getLastRowNum()+1;
+		String headerData = "Flights"+"\t"+"Departure Time"+"\t"+"Arrival Time"+"\t"+"Price";
+		XSSFRow row = sheet.createRow(0);
+		String[] rowData = headerData.split("\t");
+		for(int x=0; x<4; x++) {
+			row.createCell(x).setCellValue(rowData[x]);
+		}
+		int numOfRows = 1;
 		
 		for(int i=0; i<data.size();i++) {
-			XSSFRow row = sheet.createRow(numOfRows++);
-			String[] rowData = data.get(i).split("\t");
+			row = sheet.createRow(numOfRows++);
+			rowData = data.get(i).split("\t");
 			for(int j=0; j<rowData.length; j++) {
 				row.createCell(j).setCellValue(rowData[j]);
 			}

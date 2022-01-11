@@ -9,8 +9,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
-import com.google.common.io.Resources;
 
 public class DriverSetUp {
 	
@@ -43,12 +43,21 @@ public class DriverSetUp {
 		prop = FileIO.initProperties();
 		String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0";
 		String userDir = System.getProperty("user.dir");
-		FirefoxOptions fo = new FirefoxOptions();
+		
+	    FirefoxProfile profile = new FirefoxProfile();
+	    profile.setPreference("browser.cache.disk.enable", false);
+	    profile.setPreference("browser.cache.memory.enable", false);
+	    profile.setPreference("browser.cache.offline.enable", false);
+	    profile.setPreference("network.http.use-cache", false);
+		
+		FirefoxOptions fo = new FirefoxOptions().setProfile(profile);;
 		fo.addPreference("general.useragent.override",userAgent);
 		fo.addArguments("--disable-infobars");
 		fo.addArguments("--disable-notifications");
 		fo.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.DISMISS_AND_NOTIFY);
-		//System.setProperty("webdriver.gecko.driver",userDir + prop.getProperty("firefoxDriver"));
+		
+		System.setProperty("webdriver.gecko.driver", userDir + prop.getProperty("firefoxDriver"));
+		
 		driver = new FirefoxDriver(fo);
 		return driver;
 	}

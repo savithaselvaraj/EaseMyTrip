@@ -43,7 +43,7 @@ public class BaseUI {
 		return driver;
 	}
 	
-	public static void tearDown() {
+	public static void closeBrowser() {
 		driver.close();
 	}
 	

@@ -27,15 +27,15 @@ public class HomePage extends BaseUI {
 		this.driver = driver;
 	}
 
-	public void searchFlights(String[] testData) {
+	public void searchFlights(String fromStr, String toStr, String dDateStr, String tclass, String adult, String child, String infant ) {
 
-		String fromCity = testData[0];
-		String toCity = testData[1];
-		String departureDate = testData[2];
-		String travClass = testData[3];
-		int adultTravlers = Integer.parseInt(testData[4].replaceAll(".0", ""));
-		int childTravelers = Integer.valueOf(testData[5].replaceAll(".0", ""));
-		int infantTravelers = Integer.valueOf(testData[6].replaceAll(".0", ""));
+		String fromCity = fromStr;
+		String toCity = toStr;
+		String departureDate = dDateStr;
+		String travClass = tclass;
+		int adultTravlers = Integer.parseInt(adult.replaceAll(".0", ""));
+		int childTravelers = Integer.valueOf(child.replaceAll(".0", ""));
+		int infantTravelers = Integer.valueOf(infant.replaceAll(".0", ""));
 		
 		clickOn(fromInput, 10);
 		sendText(fromInput,fromCity);
@@ -74,6 +74,11 @@ public class HomePage extends BaseUI {
 		WebElement Adultplus = driver
 				.findElement(By.xpath("//*[@id=\"myDropdown_n\"]/div/div[1]/div[2]/div/div[3]/input"));
 
+		while (displayvalue > adult) {
+			Adultminus.click();
+			displayvalue = Integer.parseInt(Adultvalue.getAttribute("value"));
+		}
+		
 		while (displayvalue < adult) {
 			Adultplus.click();
 			displayvalue = Integer.parseInt(Adultvalue.getAttribute("value"));

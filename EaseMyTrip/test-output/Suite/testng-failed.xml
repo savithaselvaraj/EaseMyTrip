@@ -5,8 +5,7 @@
     <classes>
       <class name="AutomationProject1.EaseMyTrip.EaseMyTripTest">
         <methods>
-          <include name="readFlightsList"/>
-          <include name="testSearchFlights"/>
+          <include name="testSearchFlights" invocation-numbers="1"/>
         </methods>
       </class> <!-- AutomationProject1.EaseMyTrip.EaseMyTripTest -->
     </classes>
