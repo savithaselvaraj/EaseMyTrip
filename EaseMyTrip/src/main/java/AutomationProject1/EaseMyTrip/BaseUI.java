@@ -18,7 +18,7 @@ public class BaseUI {
 	
 	public static WebDriver driver;
 	public static Properties prop;
-	public static int count=1;
+	
 	
 	public BaseUI() {
 		prop = FileIO.initProperties();
@@ -96,6 +96,18 @@ public class BaseUI {
 		}
 	}
 	
+	/************** Get text of element ****************/
+	public static String getText(By locator) {
+		String text = null;
+		try {
+			new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(locator));
+			text = driver.findElement(locator).getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return text;
+	}
+	
 	/************** Click on element with WebElement ****************/
 	public static void clickOn(By locator, int timeout) {
 		try {
@@ -124,12 +136,10 @@ public class BaseUI {
 		}
 	}
 	
-	public static void screenShots() throws IOException {
-		String userDir = System.getProperty("user.dir");
+	public static void screenShots(String fileName) throws IOException {
+		
 		File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-		String fileName = "scsht"+count+".jpg";
-		FileUtils.copyFile(src, new File(userDir+prop.getProperty("screenshotsPath")+fileName));
-		count++;
+		FileUtils.copyFile(src, new File(fileName));
 	}
 	
 }

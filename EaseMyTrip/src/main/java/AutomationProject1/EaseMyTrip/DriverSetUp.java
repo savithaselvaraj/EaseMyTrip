@@ -50,9 +50,8 @@ public class DriverSetUp {
 	    profile.setPreference("browser.cache.offline.enable", false);
 	    profile.setPreference("network.http.use-cache", false);
 		
-		FirefoxOptions fo = new FirefoxOptions().setProfile(profile);;
+		FirefoxOptions fo = new FirefoxOptions().setProfile(profile);
 		fo.addPreference("general.useragent.override",userAgent);
-		fo.addArguments("--disable-infobars");
 		fo.addArguments("--disable-notifications");
 		fo.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.DISMISS_AND_NOTIFY);
 		

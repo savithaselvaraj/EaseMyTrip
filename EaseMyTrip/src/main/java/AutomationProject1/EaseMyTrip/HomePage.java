@@ -5,8 +5,6 @@ import java.time.Month;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage extends BaseUI {
 
@@ -18,6 +16,27 @@ public class HomePage extends BaseUI {
 	By travelClass = getLocator("travelClass_xpath");
 	By tripDoneBtn = getLocator("tripDoneBtn_xpath");
 	By searchBtn = getLocator("searchBtn_xpath");
+	
+	
+	By AdultV = getLocator("Adultvalue_id");
+	By Adultminus = getLocator("Adultminus_xpath");
+	By Adultplus = getLocator("Adultplus_xpath");
+	
+	By ChildrenV = getLocator("Childrenvalue_id");
+	By Childrenminus = getLocator("Childrenminus_xpath");
+	By Childrenplus = getLocator("Childrenplus_xpath");
+	
+	By infantsv = getLocator("infantsvalue_id");
+	By infantsminus = getLocator("infantsminus_xpath");
+	By infantsplus = getLocator("infantsplus_xpath");
+	
+	By travelerDone = getLocator("travelerDone_xpath");
+	
+	By departureDate = getLocator("departureDate_id");
+	By labelMonth1 = getLocator("labelMonth1_xpath");
+	By labelMonth2 = getLocator("labelMonth2_xpath");
+	By nextMonth = getLocator("nextMonth_id");
+	
 	
 	public HomePage() {
 		
@@ -31,7 +50,7 @@ public class HomePage extends BaseUI {
 
 		String fromCity = fromStr;
 		String toCity = toStr;
-		String departureDate = dDateStr;
+		String departDate = dDateStr;
 		String travClass = tclass;
 		int adultTravlers = Integer.parseInt(adult.replaceAll(".0", ""));
 		int childTravelers = Integer.valueOf(child.replaceAll(".0", ""));
@@ -49,7 +68,7 @@ public class HomePage extends BaseUI {
 		WebElement to = driver.findElement(By.xpath("//div[@id='toautoFill']//span[@class='ct'][contains(text(),'" + toCity + "')]"));
 		to.click();
 
-		selectDepartureDate(departureDate);
+		selectDepartureDate(departDate);
 
 		clickOn(travellerDropDown, 10);
 
@@ -67,58 +86,54 @@ public class HomePage extends BaseUI {
 
 	public void travellers(int adult, int children, int infants) {
 
-		WebElement Adultvalue = driver.findElement(By.id("optAdult"));
+		WebElement Adultvalue = driver.findElement(AdultV);
 		int displayvalue = Integer.parseInt(Adultvalue.getAttribute("value"));
-		WebElement Adultminus = driver
-				.findElement(By.xpath("//*[@id=\"myDropdown_n\"]/div/div[1]/div[2]/div/div[1]/input"));
-		WebElement Adultplus = driver
-				.findElement(By.xpath("//*[@id=\"myDropdown_n\"]/div/div[1]/div[2]/div/div[3]/input"));
 
 		while (displayvalue > adult) {
-			Adultminus.click();
+			clickOn(Adultminus, 10);
 			displayvalue = Integer.parseInt(Adultvalue.getAttribute("value"));
 		}
 		
 		while (displayvalue < adult) {
-			Adultplus.click();
+			clickOn(Adultplus, 10);
 			displayvalue = Integer.parseInt(Adultvalue.getAttribute("value"));
 		}
 
-		WebElement Childrenvalue = driver.findElement(By.id("optChild"));
+		WebElement Childrenvalue = driver.findElement(ChildrenV);
 		displayvalue = Integer.parseInt(Childrenvalue.getAttribute("value"));
-		WebElement Childrenplus = driver
-				.findElement(By.xpath("//*[@id=\"myDropdown_n\"]/div/div[2]/div[2]/div/div[3]/input"));
-
+		
+		while (displayvalue > children) {
+			clickOn(Childrenminus, 10);
+			displayvalue = Integer.parseInt(Childrenvalue.getAttribute("value"));
+		}
+		
 		while (displayvalue < children) {
-			Childrenplus.click();
+			clickOn(Childrenplus, 10);
 			displayvalue = Integer.parseInt(Childrenvalue.getAttribute("value"));
 		}
 
-		WebElement infantsvalue = driver.findElement(By.id("optInfant"));
+		WebElement infantsvalue = driver.findElement(infantsv);
 		displayvalue = Integer.parseInt(infantsvalue.getAttribute("value"));
-		WebElement infantsplus = driver
-				.findElement(By.xpath("//*[@id=\"myDropdown_n\"]/div/div[3]/div[2]/div/div[3]/input"));
-
+		
+		while (displayvalue > infants) {
+			clickOn(infantsminus, 10);
+			displayvalue = Integer.parseInt(infantsvalue.getAttribute("value"));
+		}
+		
 		while (displayvalue < infants) {
-			infantsplus.click();
+			clickOn(infantsplus, 10);
 			displayvalue = Integer.parseInt(infantsvalue.getAttribute("value"));
 		}
 
-		driver.findElement(By.xpath("//*[@id=\"traveLer\"]")).click();
+		clickOn(travelerDone, 10);
 	}
 
 	private void selectDepartureDate(String dateToSelect) {
-
-		By departureDate = By.id("ddate");
-		By labelMonth1 = By.xpath("//div[@class='box']//div[@class='month']");
-		By labelMonth2 = By.xpath("//div[@class='box1']//div[@class='month2']");
-		By nextMonth = By.id("img2Nex");
-
-		WebDriverWait wait = new WebDriverWait(driver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(departureDate));
-		driver.findElement(departureDate).click();
-		String month1 = driver.findElement(labelMonth1).getText().trim();
-		String month2 = driver.findElement(labelMonth2).getText().strip();
+		
+		clickOn(departureDate, 60);
+		
+		String month1 = getText(labelMonth1).trim();
+		String month2 = getText(labelMonth2).strip();
 
 		int m1 = Month.valueOf(getFullMonthName(month1.split(" ")[0])).getValue();
 		int m2 = Month.valueOf(getFullMonthName(month2.split(" ")[0])).getValue();
@@ -140,8 +155,8 @@ public class HomePage extends BaseUI {
 				// navigate to next month
 				System.out.println("Need to navigate to next month");
 				do {
-					driver.findElement(nextMonth).click();
-					month2 = driver.findElement(labelMonth2).getText().strip();
+					clickOn(nextMonth, 10);
+					month2 = getText(labelMonth2).strip();
 					m2 = Month.valueOf(getFullMonthName(month2.split(" ")[0])).getValue();
 					y2 = Integer.valueOf(month2.split(" ")[1]);
 					System.out.println(m2 + " " + y2 + " | " + monthNeeded + " " + yearNeeded + " " + (! (m2==monthNeeded && y2==yearNeeded)));
@@ -153,12 +168,12 @@ public class HomePage extends BaseUI {
 
 		// click on the date to select
 		// "//li[contains(@id,'_15/02/2022')]"
+		
 		StringBuffer dayId = new StringBuffer();
 		dayId.append("_").append(String.format("%2s", dayNeededd).replace(' ', '0'))
 				.append(String.format("/%2s", monthNeeded).replace(' ', '0')).append("/" + yearNeeded);
-		WebElement day2Select = driver.findElement(By.xpath("//li[contains(@id,'" + dayId.toString() + "')]"));
-		wait.until(ExpectedConditions.elementToBeClickable(day2Select));
-		day2Select.click();
+		By day2Select = By.xpath("//li[contains(@id,'" + dayId.toString() + "')]");
+		clickOn(day2Select, 10);
 
 	}
 

@@ -15,6 +15,7 @@ import java.util.Date;
 public class EaseMyTripTest extends BaseUI {
 	
 	private WebDriver driver;
+	public static int count=1;
 	
 	public EaseMyTripTest() {
 		super();
@@ -40,9 +41,11 @@ public class EaseMyTripTest extends BaseUI {
     	HomePage homePage = new HomePage(driver);
  	   	homePage.searchFlights(fromStr, toStr, dDateStr, tclass, adult, child, infant ) ;
  	   	FlightList fl = new FlightList(driver);
+ 	   	String userDir = System.getProperty("user.dir");
  	   	ArrayList<String> result = fl.getFlights();
- 	    screenShots();
  	    String timeStamp = new SimpleDateFormat("MM-dd HH-mm").format(new Date());
+ 	    String fileName = userDir+prop.getProperty("screenshotsPath")+fromStr+"-"+toStr+(count++)+"-"+timeStamp+".jpg";
+ 	    screenShots(fileName);
  	   	String sheetName = fromStr+"-"+toStr+"-"+timeStamp;
  	   	FileIO.writeToExcel(prop.getProperty("filePath"), sheetName, result);
     }
