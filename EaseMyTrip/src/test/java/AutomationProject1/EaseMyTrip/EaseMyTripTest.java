@@ -1,6 +1,7 @@
 package AutomationProject1.EaseMyTrip;
 
 
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,14 @@ public class EaseMyTripTest extends BaseUI {
 	public void openBrowser() {
 		driver = invokeBrowser();
 	}
+	
+	@Test(priority = 1)
+	public void verifyPageTitle() {
+		driver = getURL();
+		String title = driver.getTitle();
+		Assert.assertEquals(title,prop.getProperty("pageTitle"));
+	}
+	
 	
 	@DataProvider
 	public Object[][] flightSearchData() throws IOException{
@@ -57,39 +66,5 @@ public class EaseMyTripTest extends BaseUI {
     
 }
 	
-	/*
-	 * 
-	 	@BeforeTest
-	public void setUp() {
-		driver = invokeBrowser();
-    	this.driver.navigate().to(prop.getProperty("websiteURL"));
-	}
 
-	@Test(priority = 1)
-	public void verifyPageTitle() {
-		
-		String title = driver.getTitle();
-		Assert.assertEquals(title,prop.getProperty("pageTitle"));
-	}
-	
-    @Test(priority = 4, description = "Checking for flights from Mumbai to chennai on Jan 23rd with 4 adults, 3 children and 2 infants.")
-    public void testSearchFlights() throws IOException {
-    	String[] testData = FileIO.getTestDataByRowInd(FileIO.getExcelData(), 1);
- 	   	HomePage homePage = new HomePage(driver);
- 	   	homePage.searchFlights(testData);
-    }
-    
-    @Test(priority = 5)
-    public void readFlightsList() throws IOException {
-    	
-       FlightList fl = new FlightList(driver);
- 	   ArrayList<String> result = fl.getFlights();
- 	   FileIO.writeToExcel(prop.getProperty("filePath"), prop.getProperty("writeSheetName"), result);
- 	   
-    }
-        @AfterTest
-    public void tearDown() {
-		BaseUI.closeBrowser();
-	
-    */
 
